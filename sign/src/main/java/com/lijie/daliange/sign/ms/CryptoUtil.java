@@ -7,7 +7,7 @@
  * ------------------------------------------------------------- SJ 2016年9月18日
  * Initailized
  */
-package com.lijie.daliange.sign.pxl;
+package com.lijie.daliange.sign.ms;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -20,14 +20,21 @@ import java.math.BigInteger;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.KeyFactory;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.Signature;
 import java.security.SignatureException;
+import java.security.UnrecoverableKeyException;
+import java.security.cert.CertificateException;
 import java.security.spec.InvalidKeySpecException;
+import java.security.spec.KeySpec;
 import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.RSAPrivateKeySpec;
 import java.security.spec.X509EncodedKeySpec;
+import java.util.Enumeration;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.crypto.BadPaddingException;
@@ -756,5 +763,126 @@ public class CryptoUtil
         }
         return tgtBytes;
     }
+    
+    /**
+	 * 获取RSA私钥对象
+	 * 
+	 * @param filePath
+	 *            RSA私钥路径
+	 * @param fileSuffix
+	 *            RSA私钥名称，决定编码类型
+	 * @param password
+	 *            RSA私钥保护密钥
+	 * @param keyAlgorithm
+	 *            密钥算法
+	 * @return RSA私钥对象
+	 * @throws Exception
+	 */
+	@SuppressWarnings("deprecation")
+	public static PrivateKey getRSAPrivateKeyByFileSuffix(String filePath, String fileSuffix, String password, String keyAlgorithm)
+			throws Exception {
+		String keyType = "";
+		if ("keystore".equalsIgnoreCase(fileSuffix)) {
+			keyType = "JKS";
+		} else if ("pfx".equalsIgnoreCase(fileSuffix) || "p12".equalsIgnoreCase(fileSuffix)) {
+			keyType = "PKCS12";
+		} else if ("jck".equalsIgnoreCase(fileSuffix)) {
+			keyType = "JCEKS";
+		} else if ("pem".equalsIgnoreCase(fileSuffix) || "pkcs8".equalsIgnoreCase(fileSuffix)) {
+			keyType = "PKCS8";
+		} else if ("pkcs1".equalsIgnoreCase(fileSuffix)) {
+			keyType = "PKCS1";
+		} else if ("yljf".equalsIgnoreCase(fileSuffix)) {
+			keyType = "yljf";
+		} else if ("ldys".equalsIgnoreCase(fileSuffix)) {
+			keyType = "ldys";
+		} else{
+			keyType = "JKS";
+		}
+
+		InputStream in = null;
+		try {
+			in = new FileInputStream(filePath);
+			PrivateKey priKey = null;
+			if ("JKS".equals(keyType) || "PKCS12".equals(keyType) || "JCEKS".equals(keyType)) {
+				KeyStore ks = KeyStore.getInstance(keyType);
+				if (password != null) {
+					char[] cPasswd = password.toCharArray();
+					ks.load(in, cPasswd);
+					Enumeration<String> aliasenum = ks.aliases();
+					String keyAlias = null;
+					while (aliasenum.hasMoreElements()) {
+						keyAlias = (String) aliasenum.nextElement();
+						priKey = (PrivateKey) ks.getKey(keyAlias, cPasswd);
+						if (priKey != null)
+							break;
+					}
+				}
+			}else if("yljf".equals(keyType)){
+				BufferedReader br = new BufferedReader(new InputStreamReader(in));
+				String s = br.readLine();
+				PKCS8EncodedKeySpec priPKCS8=new PKCS8EncodedKeySpec(hexStrToBytes(s));
+				KeyFactory keyf=KeyFactory.getInstance("RSA");
+				PrivateKey myprikey=keyf.generatePrivate(priPKCS8);
+				return myprikey;
+			}else if("ldys".equals(keyType)){
+				byte[] b = new byte[20480];
+				in.read(b);
+				PKCS8EncodedKeySpec priPKCS8=new PKCS8EncodedKeySpec(b);
+				KeyFactory keyf=KeyFactory.getInstance("RSA");
+				PrivateKey myprikey=keyf.generatePrivate(priPKCS8);
+				return myprikey;
+			}else {
+				BufferedReader br = new BufferedReader(new InputStreamReader(in));
+				StringBuilder sb = new StringBuilder();
+				String readLine = null;
+				while ((readLine = br.readLine()) != null) {
+					if (readLine.charAt(0) == '-') {
+						continue;
+					} else {
+						sb.append(readLine);
+						sb.append('\r');
+					}
+				}
+				if ("PKCS8".equals(keyType)) {
+					PKCS8EncodedKeySpec priPKCS8 = new PKCS8EncodedKeySpec(Base64.decodeBase64(sb.toString()));
+					KeyFactory keyFactory = KeyFactory.getInstance(keyAlgorithm);
+					priKey = keyFactory.generatePrivate(priPKCS8);
+				} 
+			}
+
+			return priKey;
+		} catch (FileNotFoundException e) {
+			throw new Exception("私钥路径文件不存在");
+		} catch (KeyStoreException e) {
+			throw new Exception("获取KeyStore对象异常");
+		} catch (IOException e) {
+			throw new Exception("读取私钥异常");
+		} catch (NoSuchAlgorithmException e) {
+			throw new Exception("生成私钥对象异常");
+		} catch (CertificateException e) {
+			throw new Exception("加载私钥密码异常");
+		} catch (UnrecoverableKeyException e) {
+			throw new Exception("生成私钥对象异常");
+		} catch (InvalidKeySpecException e) {
+			throw new Exception("生成私钥对象异常");
+		} finally {
+			try {
+				if (in != null) {
+					in.close();
+				}
+			} catch (IOException e) {
+			}
+		}
+	}
+	
+	public static final byte[] hexStrToBytes(String s) {
+		byte[] bytes; 
+		bytes = new byte[s.length() / 2];
+		for (int i = 0; i < bytes.length; i++) { 
+			bytes[i] = (byte) Integer.parseInt(s.substring(2 * i, 2 * 		i + 2), 16);
+		} 
+		return bytes;
+	}
     
 }

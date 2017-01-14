@@ -11,7 +11,7 @@
  *-------------------------------------------------------------
  * pxl         2016-12-5        Initailized
  */
-package com.lijie.daliange.sign.pxl;
+package com.lijie.daliange.sign.ms;
 
 import java.util.ArrayList;
 import java.util.Collections;
