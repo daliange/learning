@@ -5,8 +5,16 @@ import java.util.Map;
 
 import org.apache.commons.codec.binary.Base64;
 
+/**
+ * 
+ * 民生签名、验签函数
+ * 
+ * 
+ * **/
 public class Sign {
 	
+	
+	/**民生验签**/
 	public static  boolean verifySign(Map<String, String> data, String encoding) throws Exception {
 		
 		String plainText = StringUtil.coverMap2String(data, String.CASE_INSENSITIVE_ORDER);
