@@ -8,7 +8,11 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 		<!-- 
 			<bean class="org.spring.ioc.impl.JsonOutputGenerator" />
 		 -->
+		 <!-- 
 		 <ref local="JsonOutputGenerator"/>
+		 -->
+		 <ref bean="JsonOutputGenerator"/>
+		  
 		</constructor-arg>
 	</bean>
 	
