@@ -10,7 +10,7 @@ public class Test3
     {
     	@SuppressWarnings("resource")
 		ApplicationContext context = 
-    	   new ClassPathXmlApplicationContext(new String[] {"Spring-Common.xml"});
+    	   new ClassPathXmlApplicationContext("Spring-Common.xml");
 
     	OutputHelper output = (OutputHelper)context.getBean("OutputHelper");
     	output.generateOutput();
