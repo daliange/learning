@@ -4,7 +4,7 @@ package org.spring.helloworld;
  * Spring bean
  * 
  */
-public class HelloWorld {
+public class HahaWorld {
 	private String name;
 	private String address;
 

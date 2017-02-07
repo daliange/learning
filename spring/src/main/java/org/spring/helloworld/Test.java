@@ -8,7 +8,11 @@ public class Test {
 		@SuppressWarnings("resource")
 		ApplicationContext context = new ClassPathXmlApplicationContext(
 				"helloworld/applicationContext.xml"); 
-		HelloWorld obj = (HelloWorld) context.getBean("helloBean");
-		obj.printHello();
+		
+		HelloWorld helloWorld = (HelloWorld) context.getBean("helloBean");
+		helloWorld.printHello();
+		
+		HahaWorld hahaWorld = (HahaWorld) context.getBean("hahaBean");
+		hahaWorld.printHello();
 	}
 }
