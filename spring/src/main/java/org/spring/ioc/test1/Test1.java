@@ -5,8 +5,7 @@ import org.spring.ioc.impl.CsvOutputGenerator;
 import org.spring.ioc.impl.JsonOutputGenerator;
 
 /**
- * 直接调用
- * 耦合程度高
+ * 直接调用耦合程度高
  * **/
 public class Test1 
 {
