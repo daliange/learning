@@ -7,7 +7,7 @@ public class Test {
 	public static void main(String[] args) {
 		@SuppressWarnings("resource")
 		ApplicationContext context = new ClassPathXmlApplicationContext(
-				"applicationContext.xml"); 
+				"helloworld/applicationContext.xml"); 
 		HelloWorld obj = (HelloWorld) context.getBean("helloBean");
 		obj.printHello();
 	}
