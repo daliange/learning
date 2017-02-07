@@ -5,7 +5,10 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
 	<bean id="OutputHelper" class="org.spring.ioc.test4.OutputHelper">
 		<constructor-arg>
+		<!-- 
 			<bean class="org.spring.ioc.impl.JsonOutputGenerator" />
+		 -->
+		 <ref local="JsonOutputGenerator"/>
 		</constructor-arg>
 	</bean>
 	
