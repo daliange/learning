@@ -21,7 +21,6 @@
   <modules>
   	<module>sign</module>
     <module>spring</module>
-    <module>com.lijie.logo</module>
     <module>logo</module>
   </modules>
 </project>
