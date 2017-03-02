@@ -22,5 +22,6 @@
   	<module>sign</module>
     <module>spring</module>
     <module>logo</module>
+    <module>rabbitmq</module>
   </modules>
 </project>
