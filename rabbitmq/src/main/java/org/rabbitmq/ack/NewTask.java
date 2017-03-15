@@ -1,4 +1,4 @@
-package org.rabbitmq;
+package org.rabbitmq.ack;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
