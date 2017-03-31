@@ -1,0 +1,23 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="CustomerBean" class="org.spring.setfactorybean.Customer">
+		<property name="sets">
+			<bean class="org.springframework.beans.factory.config.SetFactoryBean">
+				<property name="targetSetClass">
+					<value>java.util.HashSet</value>
+				</property>
+				<property name="sourceSet">
+					<list>
+						<value>one</value>
+						<value>2</value>
+						<value>three</value>
+					</list>
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+</beans>
