@@ -1,0 +1,23 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="CustomerBean" class="org.spring.mapfactorybean.Customer">
+		<property name="maps">
+			<bean class="org.springframework.beans.factory.config.MapFactoryBean">
+				<property name="targetMapClass">
+					<value>java.util.HashMap</value>
+				</property>
+				<property name="sourceMap">
+					<map>
+						<entry key="Key1" value="one" />
+						<entry key="Key2" value="two" />
+						<entry key="Key3" value="three" />
+					</map>
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+</beans>
