@@ -7,11 +7,18 @@ public class App {
 	
 	public static void main( String[] args )
     {
-    	ApplicationContext context = 
-			new ClassPathXmlApplicationContext("parentbean/applicationContext.xml");
+    	ApplicationContext context1 = 
+			new ClassPathXmlApplicationContext("parentbean/applicationContext1.xml");
 
-    	Customer cust = (Customer)context.getBean("CustomerBean");
-    	System.out.println(cust);
+    	Customer cust1 = (Customer)context1.getBean("CustomerBean");
+    	System.out.println(cust1);
+    	
+    	
+    	ApplicationContext context2 = 
+			new ClassPathXmlApplicationContext("parentbean/applicationContext2.xml");
+
+    	Customer cust2 = (Customer)context2.getBean("CustomerBean");
+    	System.out.println(cust2);
     	
     }
 
