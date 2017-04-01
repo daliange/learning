@@ -11,9 +11,7 @@ public class App {
 			new ClassPathXmlApplicationContext("parentbean/applicationContext.xml");
 
     	Customer cust = (Customer)context.getBean("CustomerBean");
-    	System.out.println(cust.getCountry());
-    	System.out.println(cust.getAction());
-    	System.out.println(cust.getType());
+    	System.out.println(cust);
     	
     }
 
