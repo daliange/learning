@@ -23,6 +23,10 @@ public class Customer {
 	public void setCountry(String country) {
 		Country = country;
 	}
+	@Override
+	public String toString() {
+		return "Customer [type=" + type + ", action=" + action + ", Country=" + Country + "]";
+	}
 	
 	
 
