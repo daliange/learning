@@ -13,8 +13,10 @@ public class App
 		new ClassPathXmlApplicationContext("intidestroymethod/applicationContext.xml");
 	
     	CustomerService cust = (CustomerService)context.getBean("customerService");
-    	
     	System.out.println(cust);
+    	CustomerServiceTwo cust2 = (CustomerServiceTwo)context.getBean("customerServiceTwo");
+    	System.out.println(cust2);
+    	
     	
     	context.close();
     }
