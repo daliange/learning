@@ -13,6 +13,8 @@ public class App {
         CustomerDAO customerDAO = (CustomerDAO) context.getBean("customerDAO");
         Customer customer = new Customer(1, "yiibai",29);
         customerDAO.insert(customer);
+        customerDAO.jdbcTemplateinsert(customer);
+        
     	
         Customer customer1 = customerDAO.findByCustomerId(1);
         System.out.println(customer1);
