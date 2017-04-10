@@ -10,18 +10,13 @@ import org.springframework.stereotype.Component;
 public class JdbcTemplateCustomDAO implements CustomerDAO {
 
 	@Autowired
-	private DataSource dataSource;
-	
 	private JdbcTemplate jdbcTemplate;
-	
 	
 	@Override
 	public void insert(Customer customer) {
 		String sql = "INSERT INTO CUSTOMER " +
 				"(CUST_ID, NAME, AGE) VALUES (?, ?, ?)";
 					 
-			jdbcTemplate = new JdbcTemplate(dataSource);
-					
 			jdbcTemplate.update(sql, new Object[] { customer.getCustId(),
 				customer.getName(),customer.getAge()  
 			});

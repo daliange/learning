@@ -15,8 +15,6 @@ public class App {
         customerDAO.insert(customer);
         CustomerDAO JdbcTemplateCustomDAO = (CustomerDAO) context.getBean("jdbcTemplateCustomDAO");
         JdbcTemplateCustomDAO.insert(customer);
-        CustomerDAO jdbcDaoSupportCustomDAO = (CustomerDAO) context.getBean("jdbcDaoSupportCustomDAO");
-        jdbcDaoSupportCustomDAO.insert(customer);
         
     	
         Customer customer1 = customerDAO.findByCustomerId(1);
