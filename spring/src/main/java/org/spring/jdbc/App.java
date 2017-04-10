@@ -9,11 +9,14 @@ public class App {
     {
     	ApplicationContext context = 
     		new ClassPathXmlApplicationContext("jdbc/applicationContext.xml");
-    	 
+    	Customer customer = new Customer(1, "yiibai",29);
+    	
         CustomerDAO customerDAO = (CustomerDAO) context.getBean("customerDAO");
-        Customer customer = new Customer(1, "yiibai",29);
         customerDAO.insert(customer);
-        customerDAO.jdbcTemplateinsert(customer);
+        CustomerDAO JdbcTemplateCustomDAO = (CustomerDAO) context.getBean("jdbcTemplateCustomDAO");
+        JdbcTemplateCustomDAO.insert(customer);
+        CustomerDAO jdbcDaoSupportCustomDAO = (CustomerDAO) context.getBean("jdbcDaoSupportCustomDAO");
+        jdbcDaoSupportCustomDAO.insert(customer);
         
     	
         Customer customer1 = customerDAO.findByCustomerId(1);
