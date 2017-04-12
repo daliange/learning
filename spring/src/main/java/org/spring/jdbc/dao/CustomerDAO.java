@@ -1,4 +1,6 @@
-package org.spring.jdbc;
+package org.spring.jdbc.dao;
+
+import org.spring.jdbc.model.Customer;
 
 public interface CustomerDAO {
 	

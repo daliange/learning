@@ -1,4 +1,4 @@
-package org.spring.jdbc;
+package org.spring.jdbcTemplate.model;
 
 public class Customer {
 	
@@ -37,7 +37,8 @@ public class Customer {
 		return "Customer [custId=" + custId + ", name=" + name + ", age=" + age + "]";
 	}
 	
-	
+	public Customer(){
+	}
 	
 	
 

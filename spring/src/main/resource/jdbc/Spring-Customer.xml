@@ -3,7 +3,8 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
-	<import resource="Spring-Datasource.xml" />
-	<import resource="Spring-Customer.xml" />
+	<bean id="customerDAO" class="org.spring.jdbc.dao.impl.JdbcCustomerDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 
 </beans>

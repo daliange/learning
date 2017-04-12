@@ -1,4 +1,4 @@
-package org.spring.jdbc;
+package org.spring.jdbc.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,17 +7,13 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
-import org.springframework.stereotype.Component;
+import org.spring.jdbc.dao.CustomerDAO;
+import org.spring.jdbc.model.Customer;
 
-@Component("customerDAO")
 public class JdbcCustomerDAO implements CustomerDAO {
 
-	@Autowired
 	private DataSource dataSource;
-	
+
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 	}
@@ -48,7 +44,6 @@ public class JdbcCustomerDAO implements CustomerDAO {
 			}
 		}
 	}
-	
 
 	public Customer findByCustomerId(int custId) {
 
@@ -79,9 +74,4 @@ public class JdbcCustomerDAO implements CustomerDAO {
 			}
 		}
 	}
-
-
-
-
-
 }
