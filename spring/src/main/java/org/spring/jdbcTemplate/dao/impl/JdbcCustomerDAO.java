@@ -14,7 +14,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 
-public class JdbcCustomerDAOImpl extends JdbcDaoSupport implements CustomerDAO
+public class JdbcCustomerDAO extends JdbcDaoSupport implements CustomerDAO
 {
 	//insert example
 	public void insert(Customer customer){

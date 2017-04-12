@@ -16,7 +16,7 @@ public class JdbcTemplateApp
     	//it's better to create an unit test rather than testing like this :)
     	
     	 ApplicationContext context = 
-    		new ClassPathXmlApplicationContext("applicationContext.xml");
+    		new ClassPathXmlApplicationContext("jdbcTemplate/applicationContext.xml");
     	 
     	 CustomerDAO customerDAO = (CustomerDAO) context.getBean("customerDAO");
          Customer customer1 = new Customer(1, "yiibai1",21);
@@ -41,10 +41,10 @@ public class JdbcTemplateApp
          Customer customerB = customerDAO.findByCustomerId2(1);
          System.out.println("Customer B : " + customerB);
          
-         List<Customer> customerAs = customerDAO.findAll();
-         for(Customer cust: customerAs){
-         	 System.out.println("Customer As : " + customerAs);
-         }
+//         List<Customer> customerAs = customerDAO.findAll();
+//         for(Customer cust: customerAs){
+//         	 System.out.println("Customer As : " + customerAs);
+//         }
         
          List<Customer> customerBs = customerDAO.findAll2();
          for(Customer cust: customerBs){
