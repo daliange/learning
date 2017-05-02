@@ -1,5 +1,5 @@
 
-package org.rabbitmq.helloworld;
+package org.rabbitmq.demo;
 
 import java.util.concurrent.TimeoutException;
 
