@@ -4,6 +4,7 @@ package org.rabbitmq.demo;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
+import com.alibaba.fastjson.JSONObject;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -19,22 +20,27 @@ public class Send {
          */  
         ConnectionFactory factory = new ConnectionFactory();  
         //设置MabbitMQ所在主机ip或者主机名  
-        factory.setHost("localhost");  
+        factory.setHost("172.28.250.43");  
         //设置端口
         factory.setPort(5672);
         //设置用户名
-        //factory.setUsername("admin");
+        factory.setUsername("admin");
         //设置密码
-        //factory.setPassword("admin");
+        factory.setPassword("admin");
         
         //创建一个连接  
         Connection connection = factory.newConnection();  
         //创建一个频道  
         Channel channel = connection.createChannel();  
         //指定一个队列  
-        channel.queueDeclare(QUEUE_NAME, false, false, false, null);  
+        channel.queueDeclare(QUEUE_NAME, true, false, false, null);  
+        JSONObject json =new JSONObject() ;
+        json.put("mid","123456");
+        json.put("orderCode","abcd");
+        json.put("midFee","000000000001");
+        
         //发送的消息  
-        String message = "hello world!";  
+        String message = json.toJSONString();  
         //往队列中发出一条消息  
         channel.basicPublish(EXCHANGE_NAME, ROUTINGKEY_NAME, null, message.getBytes());  
         System.out.println(" [x] Sent '" + message + "'");  

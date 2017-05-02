@@ -19,17 +19,17 @@ public class Reqv {
     {  
         //打开连接和创建频道，与发送端一样  
         ConnectionFactory factory = new ConnectionFactory();  
-        factory.setHost("localhost");  
+        factory.setHost("172.28.250.43");  
         //设置端口
         factory.setPort(5672);
         //设置用户名
-        //factory.setUsername("admin");
+        factory.setUsername("admin");
         //设置密码
-        //factory.setPassword("admin");
+        factory.setPassword("admin");
         Connection connection = factory.newConnection();  
         Channel channel = connection.createChannel();  
         //声明队列，主要为了防止消息接收者先运行此程序，队列还不存在时创建队列。  
-        channel.queueDeclare(QUEUE_NAME, false, false, false, null);  
+        channel.queueDeclare(QUEUE_NAME, true, false, false, null);  
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");  
           
         //创建队列消费者  
