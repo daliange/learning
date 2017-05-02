@@ -9,8 +9,10 @@ import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.QueueingConsumer;
 
 public class Reqv {
-	//队列名称  
-    private final static String QUEUE_NAME = "hello";  
+	
+	private final static String QUEUE_NAME = "sandgw.notice.shoukuanbao.midfee.queue";
+	//private final static String ROUTINGKEY_NAME = "sandgw.notice.shoukuanbao.midfee.routingkey";
+	//private final static String EXCHANGE_NAME = "sandgw.notice.shoukuanbao.exchange";
   
     public static void main(String[] argv) throws java.io.IOException,  
             java.lang.InterruptedException, TimeoutException  
@@ -18,6 +20,12 @@ public class Reqv {
         //打开连接和创建频道，与发送端一样  
         ConnectionFactory factory = new ConnectionFactory();  
         factory.setHost("localhost");  
+        //设置端口
+        factory.setPort(5672);
+        //设置用户名
+        //factory.setUsername("admin");
+        //设置密码
+        //factory.setPassword("admin");
         Connection connection = factory.newConnection();  
         Channel channel = connection.createChannel();  
         //声明队列，主要为了防止消息接收者先运行此程序，队列还不存在时创建队列。  
